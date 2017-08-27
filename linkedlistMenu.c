@@ -109,6 +109,7 @@ pre = current;
 current = current->next;
 i++;
 }
+free(current);
 if(i==0)
 *head = NULL;
 else
@@ -122,7 +123,9 @@ printf("There is no nod to delete!!!!\n\n");
 return;
 }
 else{
-*head = (*head)->next;
+NODE* current = *head;
+*head = (current)->next;
+free(current);
 }
 }
 
@@ -138,10 +141,14 @@ pre = current;
 current = current->next;
 i++;
 }
-if(i==2)
-*head=(*head)->next;
-else
+if(i==2){
+*head=(current)->next;
+free(current);
+}
+else{
 pre->next = current->next;
+free(current);
+}
 }
 
 void display(NODE* head){
