@@ -14,11 +14,12 @@ void insertPos(NODE**,int);
 void deleteBeg(NODE**);
 void deleteEnd(NODE**);
 void deletePos(NODE**,int);
+void search(NODE**,int);
 void display(NODE*);
 void main(){
 NODE* head = NULL;
 do{
-printf("Enter(1-Insert at End, 2-Insert at Beginning, 3-Insert at any Position\n4-Delete at the Beginning,5-Delete at the End,6-Delete at any Position)\n\n\n");
+printf("\nEnter :: (1-Insert at End, 2-Insert at Beginning, 3-Insert at any Position\n4-Delete at the Beginning,5-Delete at the End,6-Delete at any Position, 7 - DISPLAY, 8 - SEARCH) : ");
 int op,n;
 scanf("\n%d",&op);
 switch(op){
@@ -29,7 +30,7 @@ case 2:
 insertBeg(&head);
 break;
 case 3:
-printf("Enter Position of Element to be inserted \n\n"); scanf("%d",&n);
+printf("Enter Position of Element to be inserted : "); scanf("%d",&n);
 insertPos(&head,n);
 break;
 case 4:
@@ -39,11 +40,15 @@ case 5:
 deleteEnd(&head);
 break;
 case 6:
-printf("Enter the postition of the element to be deleted \n\n");scanf("%d",&n);
+printf("Enter the postition of the element to be deleted : ");scanf("%d",&n);
 deletePos(&head,n);
 break;
 case 7:
 display(head);
+break;
+case 8:
+printf("Enter item to be searched : "); scanf("%d",&n);
+search(&head,n);
 break;
 default :
 exit(0);
@@ -54,7 +59,7 @@ exit(0);
 }
 void insertEnd(NODE** head){
 int item;
-printf("Enter the item \n\n");scanf("%d",&item);
+printf("Enter the item : ");scanf("%d",&item);
 NODE* newnode = (NODE*)malloc(sizeof(NODE));
 newnode->item = item;
 newnode->next = NULL;
@@ -69,7 +74,7 @@ current->next = newnode;
 }
 void insertBeg(NODE** head){
 int item;
-printf("Enter the item \n\n");scanf("%d",&item);
+printf("Enter the item : ");scanf("%d",&item);
 NODE* newnode = (NODE*)malloc(sizeof(NODE));
 newnode->item = item;
 newnode->next = NULL;
@@ -82,7 +87,7 @@ newnode->next = *head;
 }
 void insertPos(NODE** head, int n){
 int item;
-printf("Enter item \n\n");scanf("%d",&item);
+printf("Enter item : ");scanf("%d",&item);
 NODE* newnode = (NODE*)malloc(sizeof(NODE));
 newnode->item = item;
 newnode->next = NULL;
@@ -153,7 +158,16 @@ pre->next = current->next;
 free(current);
 }
 }
-
+void search(NODE** head, int n){
+NODE* current = *head;
+int i = 1;
+while(current!=NULL){
+if(current->item == n){printf("%d is Found at node %d !!!\n\n",n,i); break;}
+current= current->next;
+i++;
+}
+if(current == NULL){printf("%d is not in the list \n\n",n);} 
+}
 void display(NODE* head){
 
 NODE* current = head;
