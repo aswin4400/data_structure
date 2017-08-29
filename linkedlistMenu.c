@@ -8,13 +8,13 @@ int item;
 struct node* next;
 };
 typedef struct node NODE;
-void insertBeg(NODE**);
-void insertEnd(NODE**);
-void insertPos(NODE**,int);
-void deleteBeg(NODE**);
-void deleteEnd(NODE**);
-void deletePos(NODE**,int);
-void search(NODE**,int);
+NODE* insertBeg(NODE*);
+NODE* insertEnd(NODE*);
+NODE* insertPos(NODE*,int);
+NODE* deleteBeg(NODE*);
+NODE* deleteEnd(NODE*);
+NODE* deletePos(NODE*,int);
+void search(NODE*,int);
 void display(NODE*);
 void main(){
 NODE* head = NULL;
@@ -24,31 +24,31 @@ int op,n;
 scanf("\n%d",&op);
 switch(op){
 case 1: 
-insertEnd(&head);
+head = insertEnd(head);
 break;
 case 2:
-insertBeg(&head);
+head = insertBeg(head);
 break;
 case 3:
 printf("Enter Position of Element to be inserted : "); scanf("%d",&n);
-insertPos(&head,n);
+head = insertPos(head,n);
 break;
 case 4:
-deleteBeg(&head);
+head = deleteBeg(head);
 break;
 case 5:
-deleteEnd(&head);
+head = deleteEnd(head);
 break;
 case 6:
 printf("Enter the postition of the element to be deleted : ");scanf("%d",&n);
-deletePos(&head,n);
+head = deletePos(head,n);
 break;
 case 7:
 display(head);
 break;
 case 8:
 printf("Enter item to be searched : "); scanf("%d",&n);
-search(&head,n);
+search(head,n);
 break;
 default :
 exit(0);
@@ -57,92 +57,97 @@ exit(0);
 }while(1);
 
 }
-void insertEnd(NODE** head){
+NODE* insertEnd(NODE* head){
 int item;
 printf("Enter the item : ");scanf("%d",&item);
 NODE* newnode = (NODE*)malloc(sizeof(NODE));
 newnode->item = item;
 newnode->next = NULL;
-if(*head == NULL)
-*head = newnode;
+if(head == NULL)
+head = newnode;
 else{
-NODE* current = *head;
+NODE* current = head;
 while(current->next!= NULL)
 current = current->next;
 current->next = newnode;
 }
+return head;
 }
-void insertBeg(NODE** head){
+NODE* insertBeg(NODE* head){
 int item;
 printf("Enter the item : ");scanf("%d",&item);
 NODE* newnode = (NODE*)malloc(sizeof(NODE));
 newnode->item = item;
 newnode->next = NULL;
-if(*head == NULL)
-*head = newnode;
+if(head == NULL)
+head = newnode;
 else{
-newnode->next = *head;
-*head = newnode;
+newnode->next = head;
+head = newnode;
 }
+return head;
 }
-void insertPos(NODE** head, int n){
+NODE* insertPos(NODE* head, int n){
 int item;
 printf("Enter item : ");scanf("%d",&item);
 NODE* newnode = (NODE*)malloc(sizeof(NODE));
 newnode->item = item;
 newnode->next = NULL;
-if(*head == NULL){
-*head=newnode;
-return;
+if(head == NULL){
+head=newnode;
+return head;
 }
-int i = 2;NODE* current = *head;
-while((i<=n) && (current->next != NULL)){
+int i = 2;
+NODE* current = head;
+while((i<n) && (current->next != NULL)){
 current = current->next;
 i++;
 }
 if(i==2){
-newnode->next = *head; *head = newnode;}
+newnode->next = head; head = newnode;}
 else{
 newnode->next = current->next;
 current->next = newnode;}
+return head;
 }
 
-void deleteEnd(NODE** head){
-NODE* current,*pre =*head;int i=0;
-if(*head == NULL){printf("There is no node to Delete !!\n\n"); return;}
+NODE* deleteEnd(NODE* head){
+NODE* current,*pre =head;
+if(head == NULL){printf("There is no node to Delete !!\n\n"); return head;}
 else{
-current = *head;
+current = head;
 while(current->next!=NULL){
 pre = current;
 current = current->next;
-i++;
 }
 free(current);
-if(i==0)
-*head = NULL;
+if(current == head)
+head = NULL;
 else
 pre->next = NULL;
 }
+return head;
 }
 
-void deleteBeg(NODE** head){
-if(*head == NULL){
+NODE* deleteBeg(NODE* head){
+if(head == NULL){
 printf("There is no nod to delete!!!!\n\n");
-return;
+return head;
 }
 else{
-NODE* current = *head;
-*head = (current)->next;
+NODE* current = head;
+head = (current)->next;
 free(current);
 }
+return head;
 }
 
-void deletePos(NODE** head, int n){
-if(*head == NULL){
+NODE* deletePos(NODE* head, int n){
+if(head == NULL){
 printf("There is no node to delete !!!!\n\n");
-return;
+return head;
 }
-NODE* current = *head;NODE* pre = *head;
+NODE* current = head;NODE* pre = head;
 int i = 2;
 while((i<=n) && (current->next != NULL)){
 pre = current;
@@ -150,16 +155,17 @@ current = current->next;
 i++;
 }
 if(i==2){
-*head=(current)->next;
+head=(current)->next;
 free(current);
 }
 else{
 pre->next = current->next;
 free(current);
 }
+return head;
 }
-void search(NODE** head, int n){
-NODE* current = *head;
+void search(NODE* head, int n){
+NODE* current = head;
 int i = 1;
 while(current!=NULL){
 if(current->item == n){printf("%d is Found at node %d !!!\n\n",n,i); break;}
