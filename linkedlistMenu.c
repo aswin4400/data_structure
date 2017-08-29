@@ -51,6 +51,7 @@ printf("Enter item to be searched : "); scanf("%d",&n);
 search(head,n);
 break;
 default :
+printf("\n\nThank you.... Come back again !!!\n\n");
 exit(0);
 }
 
