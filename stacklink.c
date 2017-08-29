@@ -6,9 +6,9 @@ int item;
 struct node* next;
 };
 typedef struct node NODE;
-void pop(NODE**);
-void push(NODE**);
-void peek(NODE**);
+NODE* pop(NODE*);
+NODE* push(NODE*);
+void  peek(NODE*);
 void display(NODE*);
 void main(){
 NODE* top = NULL;
@@ -18,13 +18,13 @@ int op,n;
 scanf("\n%d",&op);
 switch(op){
 case 1: 
-push(&top);
+top = push(top);
 break;
 case 2:
-pop(&top);
+top = pop(top);
 break;
 case 3:
-peek(&top);
+peek(top);
 break;
 case 4:
 display(top);
@@ -36,39 +36,41 @@ exit(0);
 }while(1);
 
 }
-void pop(NODE** top){
+NODE* pop(NODE* top){
 	NODE* temp;
-	if(*top == NULL)
+	if(top == NULL)
 		printf("Empty Stack\n");
 	else{
-		temp = *top;
-		printf("Popped value = %d \n",(*top)->item);
-		*top = (*top)->next;
+		temp = top;
+		printf("Popped value = %d \n",top->item);
+		top = top->next;
 		free(temp);
 	}
+return top;
 }
 
-void push(NODE** top){
+NODE* push(NODE* top){
 int item;
 printf("Enter the item \n\n");scanf("%d",&item);
 NODE* newnode = (NODE*)malloc(sizeof(NODE));
 newnode->item = item;
-newnode->next = *top;
-*top = newnode;
+newnode->next = top;
+top = newnode;
+return top;
 }
-void peek(NODE** top){
-	if(*top == NULL)
+void peek(NODE* top){
+	if(top == NULL)
 		printf("NULL\n");
 	else
-		printf("TOP = %d\n",(*top)->item);
+		printf("TOP = %d\n",top->item);
 }
 void display(NODE* top){
 
 NODE* current = top;
 while(current!=NULL){
-printf("%d -> ",current->item);
+printf("\n%d\n--",current->item);
 current = current->next;
 }
-printf("NULL\n\n");
+printf("\nNULL\n\n");
 }
 
