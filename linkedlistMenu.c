@@ -23,7 +23,7 @@ printf("\nEnter :: (1-Insert at End, 2-Insert at Beginning, 3-Insert at any Posi
 int op,n;
 scanf("\n%d",&op);
 switch(op){
-case 1: 
+case 1:
 head = insertEnd(head);
 break;
 case 2:
@@ -98,17 +98,18 @@ if(head == NULL){
 head=newnode;
 return head;
 }
-int i = 2;
-NODE* current = head;
-while((i<n) && (current->next != NULL)){
+int i = 0;
+NODE* current = head,*prev = head;
+while((i<n-1) && (current!= NULL)){
+prev = current;
 current = current->next;
 i++;
 }
-if(i==2){
+if(current == head){
 newnode->next = head; head = newnode;}
 else{
-newnode->next = current->next;
-current->next = newnode;}
+newnode->next = current;
+prev->next = newnode;}
 return head;
 }
 
@@ -173,7 +174,7 @@ if(current->item == n){printf("%d is Found at node %d !!!\n\n",n,i); break;}
 current= current->next;
 i++;
 }
-if(current == NULL){printf("%d is not in the list \n\n",n);} 
+if(current == NULL){printf("%d is not in the list \n\n",n);}
 }
 void display(NODE* head){
 
