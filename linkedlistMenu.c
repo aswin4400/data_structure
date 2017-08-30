@@ -10,13 +10,13 @@ struct node* next;
 typedef struct node NODE;
 NODE* insertBeg(NODE*);
 NODE* insertEnd(NODE*);
-NODE* insertPos(NODE*,int);
 NODE* deleteBeg(NODE*);
 NODE* deleteEnd(NODE*);
 NODE* deletePos(NODE*,int);
+NODE* insertPos(NODE*,int);
 void search(NODE*,int);
 void display(NODE*);
-void main(){
+int main(){
 NODE* head = NULL;
 do{
 printf("\nEnter :: (1-Insert at End, 2-Insert at Beginning, 3-Insert at any Position\n4-Delete at the Beginning,5-Delete at the End,6-Delete at any Position, 7 - DISPLAY, 8 - SEARCH) : ");
