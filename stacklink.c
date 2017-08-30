@@ -13,11 +13,11 @@ void display(NODE*);
 void main(){
 NODE* top = NULL;
 do{
-printf("Enter(1- PUSH, 2-POP, 3-PEEK, 4-DISPLAY)\n\n\n");
+prif("Enter(1- PUSH, 2-POP, 3-PEEK, 4-DISPLAY)\n\n\n");
 int op,n;
 scanf("\n%d",&op);
 switch(op){
-case 1: 
+case 1:
 top = push(top);
 break;
 case 2:
@@ -73,4 +73,3 @@ current = current->next;
 }
 printf("\nNULL\n\n");
 }
-
