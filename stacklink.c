@@ -1,4 +1,3 @@
-"This is Stack program using linked list...."
 #include<stdio.h>
 #include<stdlib.h>
 struct node{
@@ -10,11 +9,11 @@ NODE* pop(NODE*);
 NODE* push(NODE*);
 void  peek(NODE*);
 void display(NODE*);
-void main(){
+int main(){
 NODE* top = NULL;
 do{
-prif("Enter(1- PUSH, 2-POP, 3-PEEK, 4-DISPLAY)\n\n\n");
-int op,n;
+printf("Enter(1- PUSH, 2-POP, 3-PEEK, 4-DISPLAY)\n\n\n");
+int op;
 scanf("\n%d",&op);
 switch(op){
 case 1:
@@ -34,7 +33,7 @@ exit(0);
 }
 
 }while(1);
-
+return 0;
 }
 NODE* pop(NODE* top){
 	NODE* temp;
