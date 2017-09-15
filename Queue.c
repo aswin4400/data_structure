@@ -60,10 +60,9 @@ void Insert(int Data){
 }
 
 int Delete(){
-  int tmp=Queue[front];
   Queue[front]=0;
   front+=1;
-  return tmp;
+  return Queue[front-1];
 }
 
 void Display() {
