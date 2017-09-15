@@ -76,5 +76,5 @@ int isEmpty(){
 }
 
 int isFull(){
-  return (rear==MAX-1 && front == 0);
+  return (rear==MAX-1);
 }
