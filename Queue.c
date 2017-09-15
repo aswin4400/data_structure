@@ -72,9 +72,9 @@ void Display() {
 }
 
 int isEmpty(){
-  return rear==-1||front>rear;
+  return front>rear;
 }
 
 int isFull(){
-  return rear==MAX-1;
+  return (rear==MAX-1 && front == 0);
 }
